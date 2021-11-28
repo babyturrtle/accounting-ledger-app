@@ -1,11 +1,6 @@
-from django.db import models
+"""Accounting ledger models"""
 
-'''
-class LedgerFile(models.Model):
-    description = models.CharField(max_length=255, blank=True)
-    file = models.FileField(upload_to='files/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-'''
+from django.db import models
 
 
 class AccountLedger(models.Model):
@@ -16,45 +11,26 @@ class AccountLedger(models.Model):
     start_period = models.DateField()
     end_period = models.DateField()
     compiled_at = models.DateTimeField()
-    # ledger_file = models.ForeignKey(LedgerFile, on_delete=models.CASCADE)
+
+
+class AccountClass(models.Model):
+    number = models.PositiveIntegerField()
+    name = models.CharField(max_length=200, unique=True)
 
 
 class OpeningBalance(models.Model):
     active_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
     passive_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
 
-    def __str__(self):
-        return f'{self.active_amount}, {self.passive_amount}'
-
-    def save(self, *args, **kwargs):
-        pass
-
 
 class Turnover(models.Model):
     debit_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
     credit_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
 
-    def __str__(self):
-        return f'{self.debit_amount}, {self.credit_amount}'
-
-    def save(self, *args, **kwargs):
-        pass
-
 
 class ClosingBalance(models.Model):
     active_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
     passive_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
-
-    def __str__(self):
-        return f'{self.active_amount}, {self.passive_amount}'
-
-    def save(self, *args, **kwargs):
-        pass
-
-
-class AccountClass(models.Model):
-    number = models.PositiveIntegerField()
-    name = models.CharField(max_length=200, unique=True)
 
 
 class Account(models.Model):

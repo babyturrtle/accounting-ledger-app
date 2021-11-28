@@ -52,12 +52,3 @@ def read_excel(file: str) -> list:
         print(account)
 
     return accounts
-
-
-def main():
-    get_ledger_info('../../test.xls')
-    read_excel('../../test.xls')
-
-
-if __name__ == '__main__':
-    main()
