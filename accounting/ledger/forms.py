@@ -1,13 +1,12 @@
 """Accounting ledger forms"""
 
 from django import forms
-from .models import LedgerFile
+from .models import AccountLedger
 
 
 class LedgerFileForm(forms.ModelForm):
     """Form for uploading files."""
 
     class Meta:
-        model = LedgerFile
-
-        fields = ('description', 'file',)
+        model = AccountLedger
+        fields = ('file',)

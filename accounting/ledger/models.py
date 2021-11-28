@@ -1,23 +1,27 @@
 from django.db import models
 
-
+'''
 class LedgerFile(models.Model):
     description = models.CharField(max_length=255, blank=True)
     file = models.FileField(upload_to='files/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+'''
 
 
 class AccountLedger(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    file = models.FileField(upload_to='files/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
     bank = models.CharField(max_length=255)
     start_period = models.DateField()
     end_period = models.DateField()
     compiled_at = models.DateTimeField()
-    ledger_file = models.ForeignKey(LedgerFile, on_delete=models.CASCADE)
+    # ledger_file = models.ForeignKey(LedgerFile, on_delete=models.CASCADE)
 
 
 class OpeningBalance(models.Model):
-    active_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
-    passive_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
+    active_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
+    passive_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
 
     def __str__(self):
         return f'{self.active_amount}, {self.passive_amount}'
@@ -27,8 +31,8 @@ class OpeningBalance(models.Model):
 
 
 class Turnover(models.Model):
-    debit_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
-    credit_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
+    debit_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
+    credit_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
 
     def __str__(self):
         return f'{self.debit_amount}, {self.credit_amount}'
@@ -38,8 +42,8 @@ class Turnover(models.Model):
 
 
 class ClosingBalance(models.Model):
-    active_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
-    passive_amount = models.DecimalField(max_digits=20, decimal_places=2, default=0.00)
+    active_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
+    passive_amount = models.DecimalField(max_digits=20, decimal_places=4, default=0)
 
     def __str__(self):
         return f'{self.active_amount}, {self.passive_amount}'

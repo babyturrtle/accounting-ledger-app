@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from .models import *
 from .forms import LedgerFileForm
+from .utils import get_ledger_info, read_excel
 
 
 def file_upload(request):
@@ -16,11 +17,11 @@ def file_upload(request):
         return render(request, template, context)
 
     elif request.method == 'POST':
-        used_form = LedgerFileForm(request.POST)
-        if used_form.is_valid():
-            pass
+        form = LedgerFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
             return render(request, template, context)
-        context['errors'] = used_form.errors
+        context['errors'] = form.errors
 
         return render(request, template, context)
 
