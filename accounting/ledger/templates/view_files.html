@@ -9,25 +9,23 @@
         <table>
             <tr>
                 <th>№</th>
-                <th>Short url</th>
-                <th>Original url</th>
-                <th>Clicked</th>
-                <th>Date created</th>
+                <th>Название</th>
+                <th>Дата создания</th>
+                <th>Дата загрузки</th>
             </tr>
             {% for row in data %}
                 <tr>
                     <td style="text-align: center">{{ forloop.counter }}</td>
-                    <td>{{ path }}{{ row.short_url }}</td>
-                    <td><a href="{{ row.long_url }}" class="link">{{ row.long_url }}</a></td>
-                    <td style="text-align: center">{{ row.clicks }}</td>
-                    <td>{{ row.created }}</td>
+                    <td><a href="{% url 'ledger_file' file_id=row.id %}" class="link">{{ row.description }}</a></td>
+                    <td style="text-align: center">{{ row.compiled_at }}</td>
+                    <td style="text-align: center">{{ row.uploaded_at }}</td>
                 </tr>
             {% endfor %}
         </table>
     {% else %}
         <div class="centered" style="color: orange; margin: 3em 0 3em 0;">
-            <p>You haven't shortened any URLs yet...</p>
-            <p>Go ahead and create some shorturls now!</p>
+            <p>База данных пуста...</p>
+            <p>Для добавления данных загрузите новый файл!</p>
         </div>
     {% endif %}
 

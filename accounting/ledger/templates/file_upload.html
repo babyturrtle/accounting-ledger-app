@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block header %}
-    <h1>{% block title %}Create a short URL{% endblock %}</h1>
+    <h1>{% block title %}Загрузка файла{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
     <div class="centered">
         <form action="" method="post">
             {% csrf_token %}
-            {{ form.long_url }}
-            <button class="button" type="submit">Shorten</button>
+            {{ form.file }}
+            <button class="button" type="submit">Загрузить</button>
         </form>
     </div>
 
@@ -19,18 +19,11 @@
       </div>
     {% endif %}
 
-	{% if no_user %}
-      <div class="centered" role="alert">
-        <p style="color: red;">{{no_user}}</p>
-      </div>
-    {% endif %}
-
-    {% if new_url %}
+    {% if not errors %}
       <div class="centered">
-        <h2>Your shortened Url</h2>
-        <p>You can copy the Link below and share it with anyone!</p>
-        <p class="shorturl">{{ new_url }}</p>
-          <p class="long_url"><span>Previous URL: </span><a href="{{ long_url }}" class="link">{{long_url}}</a></p>
+        <h2>Ура!</h2>
+        <p>Ваш файл успешно загружен.</p>
+        <p>Для просмотра содержимого файла найдите его в списке всех файлов.</p>
       </div>
     {% endif %}
 
